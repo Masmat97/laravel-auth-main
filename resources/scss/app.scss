@@ -1,0 +1,5 @@
+@import '~bootstrap/scss/bootstrap';
+
+li.nav-item:hover{
+    background-color:rgba($color: white, $alpha: 0.1);
+}
