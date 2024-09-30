@@ -11,9 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('projects', function (Blueprint $table) {
-            $table->unsignedBigInteger('type_id')->nullable()->after('id'); 
-            $table->foreign('type_id')->references('id')->on('types')->onDelete('set null'); 
+        Schema::create('projects', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->text('description');
+            $table->string('img_preview');
+
+            $table->foreignId('type_id')->constrained();
+
+            $table->timestamps();
         });
     }
 
@@ -22,9 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('projects', function (Blueprint $table) {
-            $table->dropForeign(['type_id']);
-            $table->dropColumn('type_id');
-        });
+        Schema::dropIfExists('projects');
     }
 };
